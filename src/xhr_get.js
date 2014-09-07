@@ -7,24 +7,22 @@ function get( url, cbSuccess, cbFail){
   } else if (window.ActiveXObject) {
     try {
       httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
-    }
-    catch (e) {
+    } catch (e) {
       try {
         httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-      }
-      catch (e) {}
+      }catch (e) {}
     }
   }
 
   if (!httpRequest) {
-    console.error('AppStore unable to make an XHR');
+    console.error('Unable to make an XHR');
     return false;
   }
 
   httpRequest.onreadystatechange = function(xhr){
     if (httpRequest.readyState === 4) {
       if(httpRequest.status === 200){
-        cbSuccess(xhr);
+        cbSuccess && cbSuccess(xhr);
       }else {
         console.error('Unable to fetch apps');
         cbFail && cbFail();
