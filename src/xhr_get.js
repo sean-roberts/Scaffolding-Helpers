@@ -29,7 +29,7 @@ function get( url, options, cbSuccess, cbFail){
     } catch (e) {
       try {
         httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-      }catch (e) {}
+      }catch (ev) { }
     }
   }
 
@@ -44,7 +44,9 @@ function get( url, options, cbSuccess, cbFail){
         cbSuccess( options.type === 'json' ? JSON.parse(xhr) : xhr);
       }else {
         console.error('Unable to fetch apps');
-        cbFail && cbFail();
+        if(cbFail){
+          cbFail();
+        }
       }
     }
   };
